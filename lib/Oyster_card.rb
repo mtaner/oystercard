@@ -22,7 +22,6 @@ class Oyster_card
 	def touch_in entry_station
 		fail "Insufficient funds" if @balance < MINIMUM
 		@entry_station = entry_station
-
 	end
 
 	def touch_out exit_station
