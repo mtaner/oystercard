@@ -10,7 +10,7 @@ class Journey
 		@entry_station = nil
 		@exit_station = nil
 
-		# default fare is penalty until changed 
+		# default fare is penalty until changed
 		@fare = PENALTY
 	end
 
