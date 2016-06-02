@@ -5,21 +5,22 @@ class JourneyLog
 
 	def initialize
 		@journey_history = Array.new
-		@journey = Journey.new
-		@entry = nil
-		@exit = nil
 	end
 
 	def start entry
-		journey.journey_start(entry)
-		@entry = entry
-		current_journey
+			#journey exists - this is the second touch in -
+			# there was no touch out.
+			# Make them pay for it - start a new journey with the new station.
+			write_journey if !!journey
+			@journey = Journey.new
+			@entry = entry
+			journey.journey_start(entry)
 	end
 
 	def finish exit
-		journey.journey_finish(exit)
 		@exit = exit
-		current_journey
+		write_journey
+		journey.journey_finish(exit)
 	end
 
 	def log
@@ -27,15 +28,21 @@ class JourneyLog
 	end
 
 	private
+
 	attr_reader :entry, :exit
-	def current_journey
+
+	def kill_journey
+		@journey = nil
+	end
+
+	def write_journey
 		journey_history << Hash[entry, exit]
 	end
 
 end
 
-
-p jl = JourneyLog.new
-p jl.start(:one)
-p jl.finish(:two)
-p jl.log
+jlog = JourneyLog.new
+jlog.start("Bank")
+p jlog.start("Angel")
+p jlog.finish("Euston")
+p jlog.log

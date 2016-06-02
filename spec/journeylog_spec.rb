@@ -8,6 +8,9 @@ describe JourneyLog do
 
 	describe "#start" do
 		it {is_expected.to respond_to(:start)}
+		it "should return correct fare(panelty or normal charge)" do
+			expect(subject.start(paddington)).to eq Journey::PENALTY
+		end
 	end
 	describe "#finish" do
 		it {is_expected.to respond_to(:finish)}
@@ -15,12 +18,13 @@ describe JourneyLog do
 
 	describe '#log' do
 		it {is_expected.to respond_to(:log)}
-		it 'does stuff ' do
-			p '-----------'
-			p journeylog.start(paddington)
-			p journeylog.finish(liverpool_st)
-			p journeylog.log
+		it 'shows a recorded journey' do
+			journeylog.start(paddington)
+			journeylog.finish(liverpool_st)
 			expect(journeylog.log).to include(paddington => liverpool_st)
 		end
 	end
+
+
+
 end
