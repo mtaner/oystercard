@@ -20,10 +20,6 @@ describe Oystercard do
 
   describe "#touch_in" do
 
-    it "should return station if user touched in" do
-      expect(subject.touch_in(entry_station)).to eq [entry_station]
-    end
-
     it 'should raise an error if balance is under minimum' do
        expect{Oystercard.new.touch_in(entry_station)}.to raise_error "There is not enough credit."
     end
