@@ -3,9 +3,9 @@ require 'Journey.rb'
 
 describe Journey do
 	# dummy station 1
-	let(:station) { double :station}
+	let(:station) { double :station, zone: 1}
 	# dummy station 2
-	let(:other_station) { double :station}
+	let(:other_station) { double :station, zone: 2}
 
 	subject(:journey) {described_class.new}
 
@@ -19,13 +19,6 @@ describe Journey do
 		expect(journey.journey_finish(station)).to eq(Journey::PENALTY)
 	end
 
-	it 'has an entry station' do
-		# start journey first
-		journey.journey_start(station)
-		# check if entry station is stored 
-		expect(journey.entry_station).to eq station
-	end
-
 	it "returns a penalty fare if no exit station given" do
 		# start journey first
 		journey.journey_start(station)
@@ -34,12 +27,12 @@ describe Journey do
 	end
 
 	it 'calculates a fare when journey is finished' do
-		# start journey 
+		# start journey
 		journey.journey_start(station)
-		# end journey 
+		# end journey
 		journey.journey_finish(other_station)
-		# check the fare 
-		expect(journey.fare).to eq 1
+		# check the fare
+		expect(journey.fare).to eq 2
 	end
 
 end

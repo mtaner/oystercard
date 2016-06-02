@@ -42,7 +42,6 @@ class JourneyLog
 	def no_touch_in
 		@journey = Journey.new
 		@journey.journey_start(nil)
-
 	end
 
 	def kill_journey

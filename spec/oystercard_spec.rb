@@ -19,7 +19,7 @@ describe Oyster_card do
 	end
 
 	it "Can charges on touch out" do
-		expect {card.touch_out(paddington)}.to change{card.balance}.by(-Oyster_card::MINIMUM)
+		expect {card.touch_out(paddington)}.to change{card.balance}.by(-Journey::PENALTY)
 	end
 
 	it "Can't touch in" do

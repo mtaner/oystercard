@@ -1,10 +1,10 @@
-require './Oyster_card.rb'
-require './Station.rb'
+require_relative './Oyster_card.rb'
+require_relative './Station.rb'
 
 p card = Oyster_card.new(10)
 
 waterloo = Station.new(1, "waterloo")
-bank = Station.new(1, "bank")
+bank = Station.new(2, "bank")
 
 p "Card balance before :#{card.balance}"
 

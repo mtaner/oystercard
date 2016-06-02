@@ -1,6 +1,8 @@
+require_relative 'station'
+
 class Journey
 
-	attr_reader :fare, :entry_station
+	attr_reader :fare
 
 	MINIMUM = 1
 	PENALTY = 6
@@ -33,7 +35,8 @@ class Journey
 		# a journey is only complete if start and end stations are present
 		if @entry_station && @exit_station
 			# if both are there, the fare is £1
-			@fare = MINIMUM
+			# @fare = MINIMUM
+			@fare = (@entry_station.zone - @exit_station.zone).abs + MINIMUM
 		else
 			# if not, penalty
 			@fare = PENALTY

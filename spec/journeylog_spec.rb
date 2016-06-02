@@ -2,13 +2,14 @@ require 'journeylog'
 describe JourneyLog do
 	subject(:journeylog) {described_class.new}
 
-	let(:paddington) {double(:station)}
+	let(:paddington) {double :station, zone: 1}
 
-	let(:liverpool_st) {double(:station)}
+	let(:liverpool_st) {double :station, zone: 1}
 
 	describe "#start" do
 		it {is_expected.to respond_to(:start)}
 		it "should return correct fare(panelty or normal charge)" do
+			subject.start(paddington)
 			expect(subject.start(paddington)).to eq Journey::PENALTY
 		end
 	end
