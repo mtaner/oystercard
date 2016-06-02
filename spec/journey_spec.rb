@@ -16,28 +16,28 @@ describe Journey do
 
 	it "returns itself when exiting a journey" do
 		# check output
-		expect(journey.finish(station)).to eq(journey)
+		expect(journey.journey_finish(station)).to eq(journey)
 	end
 
 	it 'has an entry station' do
 		# start journey first
-		journey.start(station)
+		journey.journey_start(station)
 		# check if entry station is stored 
 		expect(journey.entry_station).to eq station
 	end
 
 	it "returns a penalty fare if no exit station given" do
 		# start journey first
-		journey.start(station)
+		journey.journey_start(station)
 		# check the fare for unfinished journey
 		expect(journey.fare).to eq Journey::PENALTY
 	end
 
 	it 'calculates a fare when journey is finished' do
 		# start journey 
-		journey.start(station)
+		journey.journey_start(station)
 		# end journey 
-		journey.finish(other_station)
+		journey.journey_finish(other_station)
 		# check the fare 
 		expect(journey.fare).to eq 1
 	end

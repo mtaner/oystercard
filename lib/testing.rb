@@ -15,4 +15,4 @@ p "Entry station: #{card.entry_station}"
 card.touch_out(bank)
 p card.in_journey?
 p "Card balance:#{card.balance}"
-p card.journey_history
+# p card.journey_history

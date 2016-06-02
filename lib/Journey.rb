@@ -14,14 +14,15 @@ class Journey
 		@fare = PENALTY
 	end
 
-	def start station
+	def journey_start station
 		# set entry station
 		@entry_station = station
 		# calculate fare
 		get_fare
+		self
 	end
 
-	def finish station
+	def journey_finish station
 		# set exit station
 		@exit_station = station
 		# calculate fare
