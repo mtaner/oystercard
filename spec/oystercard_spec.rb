@@ -18,33 +18,12 @@ describe Oyster_card do
 
 	end
 
-	xit "Can charges on touch out" do
+	it "Can charges on touch out" do
 		expect {card.touch_out(paddington)}.to change{card.balance}.by(-Oyster_card::MINIMUM)
 	end
 
-	it {is_expected.to respond_to(:in_journey?)}
-
-	xit "Can't touch in" do
+	it "Can't touch in" do
 		expect{ card.touch_in(paddington) }.to raise_error "Insufficient funds"
 	end
-
-	xit "Can touch out" do
-		card.touch_out(liverpool_st)
-		expect(card.in_journey?).to eq false
-	end
-
-	# the following tests can be surrounded by a context clause and before each test top up
-	xit "Can touch in" do
-		card.top_up(Oyster_card::MINIMUM)
-		card.touch_in(paddington)
-		expect(card.in_journey?).to eq true
-	end
-
-	xit "Entry Station" do
-		card.top_up(Oyster_card::MINIMUM)
-		card.touch_in(paddington)
-		expect(card.entry_station).to eq paddington
-	end
-
 
 end

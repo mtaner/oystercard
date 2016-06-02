@@ -1,18 +1,18 @@
 require './Oyster_card.rb'
 require './Station.rb'
 
-p card = Oyster_card.new
-card.top_up(4)
-p "New card balance:#{card.balance}"
+p card = Oyster_card.new(10)
 
-p waterloo = Station.new(1, "waterloo")
-p bank = Station.new(1, "bank")
+waterloo = Station.new(1, "waterloo")
+bank = Station.new(1, "bank")
 
+p "Card balance before :#{card.balance}"
 
 card.touch_in(waterloo)
-p card.in_journey?
-p "Entry station: #{card.entry_station}"
+p "Card balance after first touch in: #{card.balance}"
+card.touch_in(waterloo)
+p "Card balance after second touch in (no change): #{card.balance}"
+
 card.touch_out(bank)
-p card.in_journey?
-p "Card balance:#{card.balance}"
-# p card.journey_history
+
+p "Card balance after touch out (-1): #{card.balance}"

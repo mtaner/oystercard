@@ -16,7 +16,7 @@ describe Journey do
 
 	it "returns itself when exiting a journey" do
 		# check output
-		expect(journey.journey_finish(station)).to eq(journey)
+		expect(journey.journey_finish(station)).to eq(Journey::PENALTY)
 	end
 
 	it 'has an entry station' do

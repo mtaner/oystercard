@@ -8,19 +8,20 @@ class JourneyLog
 	end
 
 	def start entry
-			#journey exists - this is the second touch in -
-			# there was no touch out.
-			# Make them pay for it - start a new journey with the new station.
-			write_journey if !!journey
-			@journey = Journey.new
-			@entry = entry
-			journey.journey_start(entry)
+		no_touch_out if !!journey
+		@journey = Journey.new
+		@entry = entry
+		fare = journey.journey_start(entry)
+		@penalty ? fare : 0
 	end
 
 	def finish exit
+		no_touch_in unless !!journey
 		@exit = exit
+		fare = journey.journey_finish(exit)
 		write_journey
-		journey.journey_finish(exit)
+		kill_journey
+		fare
 	end
 
 	def log
@@ -31,6 +32,19 @@ class JourneyLog
 
 	attr_reader :entry, :exit
 
+	def no_touch_out
+		@exit = nil
+		@penalty = true
+		write_journey
+		kill_journey
+	end
+
+	def no_touch_in
+		@journey = Journey.new
+		@journey.journey_start(nil)
+
+	end
+
 	def kill_journey
 		@journey = nil
 	end
@@ -40,9 +54,3 @@ class JourneyLog
 	end
 
 end
-
-jlog = JourneyLog.new
-jlog.start("Bank")
-p jlog.start("Angel")
-p jlog.finish("Euston")
-p jlog.log
